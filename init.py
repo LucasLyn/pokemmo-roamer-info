@@ -11,4 +11,6 @@ timezone = pytz.UTC
 # Get the current month
 current_time = datetime.now(timezone)
 current_month = current_time.month
+next_month = current_month+1
 current_month_name = month_names[current_month]
+next_month_name = month_names[next_month]
