@@ -84,3 +84,75 @@ all_roamers = [kanto_roamers,
 
 
 
+def get_avail_roamer_in_region(roamers:list[Roamer],
+                                          month:int
+                                          ) -> Roamer:
+    '''
+    Get's the available roamer from a given month from a list of region roamers.
+
+    ### Parameters:
+    - roamers (list[Roamer]):
+        All the roamers in a region.
+    
+    - month (int):
+        The month to get the corresponding available roamer of.
+    
+    ### Returns:
+        The available roamer from a region, corresponding to a given month.
+    '''
+    for roamer in roamers:
+        if roamer.is_available(month):
+            return roamer
+
+
+def get_avail_roamers_in_month(all_roamers:list[list[Roamer]],
+                                month:int
+                                )-> list[Roamer]:
+    '''
+    Get's all available roamers for a given month.
+
+    ### Parameters:
+    - all_roamers (list[list[Roamer]]):
+        List of list of every roamer in each region.
+        Outer list is the region, inner list is the roamers in said region.
+    
+    month (int):
+        The month to get corresponding roamers of.
+    
+    ### Returns:
+        A list of all the roamers available in a given month.
+    '''
+    currently_avail_roamers = []
+
+    for region_roamers in all_roamers:
+        currently_avail_roamers.append(get_avail_roamer_in_region(region_roamers, month))
+
+    return currently_avail_roamers
+
+
+def print_avail_roamers(roamers:list[Roamer],
+                                  prefix_str:str = None):
+    '''
+    Nicely prints all the currently available roamers in each region.
+
+    ### Parameters:
+    - roamers (list[Roamer]):
+        The given roamers to print.
+    
+    - prefix_str (str):
+        The string to print before printing roamer info.
+    '''
+    if prefix_str != None:
+        print(prefix_str)
+    
+    for roamer in roamers:
+        # Placeholder null check until every region has a set of roamers
+        if roamer == None:
+            continue
+            
+        print(f"## {roamer.region}:")
+        print(f"- {roamer.name}")
+        print(f"- Can be found outdoors in: {roamer.get_avail_locations()}\n\n")
+
+
+
