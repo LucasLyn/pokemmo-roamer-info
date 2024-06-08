@@ -1,5 +1,5 @@
-from init import (month_names,
-                  current_month)
+from __init__ import (month_names,
+                      current_month)
 
 class Roamer:
     def __init__(self,

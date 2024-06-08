@@ -1,11 +1,11 @@
 # roamer contains the Roamer class
 from Roamer import Roamer
 # init.py contains package imports and one-time assigned variables
-from init import (current_month,
-                  current_month_name,
-                  next_month,
-                  next_month_name,
-                  use_next_month)
+from __init__ import (current_month,
+                      current_month_name,
+                      next_month,
+                      next_month_name,
+                      use_next_month)
 
 
 # Region name strings
