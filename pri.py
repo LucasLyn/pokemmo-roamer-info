@@ -92,7 +92,7 @@ def get_avail_roamer_in_region(roamers:list[Roamer],
                                           month:int
                                           ) -> Roamer:
     '''
-    Get's the available roamer from a given month from a list of region roamers.
+    Gets the available roamer from a given month from a list of region roamers.
 
     ### Parameters:
     - roamers (list[Roamer]):
@@ -113,7 +113,7 @@ def get_avail_roamers_in_month(all_roamers:list[list[Roamer]],
                                 month:int
                                 )-> list[Roamer]:
     '''
-    Get's all available roamers for a given month.
+    Gets all available roamers for a given month.
 
     ### Parameters:
     - all_roamers (list[list[Roamer]]):
@@ -133,11 +133,46 @@ def get_avail_roamers_in_month(all_roamers:list[list[Roamer]],
 
     return currently_avail_roamers
 
+def get_avail_roamers_str(roamers:list[Roamer],
+                          prefix_str:str = None
+                          ) -> str:
+    '''
+    Gets a nice string of all given roamers.
+
+    ### Parameters:
+    - roamers (list[Roamer]):
+        A list of roamers to construct a string of.
+    
+    - prefix_str (str):
+        A prefix string to concat into the beginning of the final string.
+    
+    ### Returns:
+        A pretty string with roamers, their name, region, and where they can be found.
+    '''
+    final_str_list = []
+
+    # If prefix_str is given, concat it at the beginning
+    if prefix_str != None:
+        final_str_list.append("## " + prefix_str + "\n")
+    
+    for roamer in roamers:
+        # Placeholder null check until every region has a set of roamers
+        if roamer == None:
+            continue
+        
+        # Construct all lines into a list
+        final_str_list.append(f"## {roamer.region}:\n")
+        final_str_list.append(f"- {roamer.name}\n")
+        final_str_list.append(f"- Can be found outdoors in: {roamer.get_avail_locations()}\n\n")
+
+    # Return a concatenated string of all lines in the list
+    return ''.join(final_str_list)
 
 def print_avail_roamers(roamers:list[Roamer],
-                                  prefix_str:str = None):
+                        prefix_str:str = None):
     '''
     Nicely prints all the currently available roamers in each region.
+    Wrapper for the function 'get_avail_roamers_str()'
 
     ### Parameters:
     - roamers (list[Roamer]):
@@ -146,17 +181,7 @@ def print_avail_roamers(roamers:list[Roamer],
     - prefix_str (str):
         The string to print before printing roamer info.
     '''
-    if prefix_str != None:
-        print(prefix_str)
-    
-    for roamer in roamers:
-        # Placeholder null check until every region has a set of roamers
-        if roamer == None:
-            continue
-            
-        print(f"## {roamer.region}:")
-        print(f"- {roamer.name}")
-        print(f"- Can be found outdoors in: {roamer.get_avail_locations()}\n\n")
+    print(get_avail_roamers_str(roamers, prefix_str))
 
 
 
