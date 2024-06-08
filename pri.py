@@ -156,3 +156,11 @@ def print_avail_roamers(roamers:list[Roamer],
 
 
 
+
+# Current roamers
+curr_roamers = get_avail_roamers_in_month(all_roamers, current_month)
+print_avail_roamers(curr_roamers, prefix_str=f"Currently available roamers ({current_month_name})")
+
+# Roamers next month
+next_roamers = get_avail_roamers_in_month(all_roamers, next_month)
+print_avail_roamers(next_roamers, prefix_str=f"Next available roamers ({next_month_name})")
